@@ -15,7 +15,7 @@
 		78FCFDA123F920930051B48E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FCFD9F23F920930051B48E /* LaunchScreen.storyboard */; };
 		78FCFDAC23F920940051B48E /* DogBreedClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFDAB23F920940051B48E /* DogBreedClassifierTests.swift */; };
 		78FCFDB723F920940051B48E /* DogBreedClassifierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFDB623F920940051B48E /* DogBreedClassifierUITests.swift */; };
-		78FCFDC923F921600051B48E /* DogBreedClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFDC823F921600051B48E /* DogBreedClassifier.mlmodel */; };
+		78FCFDC923F921600051B48E /* DogBreedClassifierModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFDC823F921600051B48E /* DogBreedClassifierModel.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,7 @@
 		78FCFDB223F920940051B48E /* DogBreedClassifierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DogBreedClassifierUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		78FCFDB623F920940051B48E /* DogBreedClassifierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedClassifierUITests.swift; sourceTree = "<group>"; };
 		78FCFDB823F920940051B48E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		78FCFDC823F921600051B48E /* DogBreedClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DogBreedClassifier.mlmodel; sourceTree = "<group>"; };
+		78FCFDC823F921600051B48E /* DogBreedClassifierModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DogBreedClassifierModel.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +107,7 @@
 				78FCFD9A23F920930051B48E /* Assets.xcassets */,
 				78FCFD9F23F920930051B48E /* LaunchScreen.storyboard */,
 				78FCFDA223F920930051B48E /* Info.plist */,
-				78FCFDC823F921600051B48E /* DogBreedClassifier.mlmodel */,
+				78FCFDC823F921600051B48E /* DogBreedClassifierModel.mlmodel */,
 				78FCFD9C23F920930051B48E /* Preview Content */,
 			);
 			path = DogBreedClassifier;
@@ -273,7 +273,7 @@
 				78FCFD9523F920930051B48E /* AppDelegate.swift in Sources */,
 				78FCFD9723F920930051B48E /* SceneDelegate.swift in Sources */,
 				78FCFD9923F920930051B48E /* ContentView.swift in Sources */,
-				78FCFDC923F921600051B48E /* DogBreedClassifier.mlmodel in Sources */,
+				78FCFDC923F921600051B48E /* DogBreedClassifierModel.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

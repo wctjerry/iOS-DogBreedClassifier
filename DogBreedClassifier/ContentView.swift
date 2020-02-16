@@ -23,7 +23,7 @@ struct ContentView: View {
     }
     
     func runClassifier() {
-        guard let model = try? VNCoreMLModel(for: DogBreedClassifier().model) else {
+        guard let model = try? VNCoreMLModel(for: DogBreedClassifierModel().model) else {
             label = "Error converting model..."
             return
         }
