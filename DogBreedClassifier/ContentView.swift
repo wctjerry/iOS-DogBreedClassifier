@@ -13,13 +13,32 @@ import Vision
 struct ContentView: View {
     @State var label: String = "Classifying"
     @State var imageName: String = "123"
+    @State private var selectionIndex = 0
+    
+    var selections = ["Dog A", "Dog B", "Dog C", "Dog D"]
+    
     
     var body: some View {
-        VStack {
-            Image("\(imageName)")
-             
-            Text("\(label)")
-        }.onAppear(perform: runClassifier)
+        NavigationView {
+            List {
+                VStack {
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height: 300, alignment: .center)
+                        .fixedSize()
+                    
+                    Picker(selection: $selectionIndex, label: Text("Select")) {
+                        ForEach(0 ..< selections.count) { index in
+                            Text(self.selections[index])
+                                .navigationBarTitle(Text("Battle against AI"))
+                        }
+                    }
+                    
+                    Text("You selected \(selections[selectionIndex])")
+                }
+            }
+        }
     }
     
     func runClassifier() {
