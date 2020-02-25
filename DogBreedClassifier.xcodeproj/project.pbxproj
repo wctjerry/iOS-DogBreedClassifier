@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78FB3261240270EA00666F5B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB3260240270EA00666F5B /* Data.swift */; };
 		78FCFD9523F920930051B48E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFD9423F920930051B48E /* AppDelegate.swift */; };
 		78FCFD9723F920930051B48E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFD9623F920930051B48E /* SceneDelegate.swift */; };
 		78FCFD9923F920930051B48E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFD9823F920930051B48E /* ContentView.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		78FB3260240270EA00666F5B /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		78FCFD9123F920930051B48E /* DogBreedClassifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogBreedClassifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78FCFD9423F920930051B48E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78FCFD9623F920930051B48E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78FB325F240270D800666F5B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				78FB3260240270EA00666F5B /* Data.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		78FCFD8823F920930051B48E = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 		78FCFD9323F920930051B48E /* DogBreedClassifier */ = {
 			isa = PBXGroup;
 			children = (
+				78FB325F240270D800666F5B /* Model */,
 				78FCFD9423F920930051B48E /* AppDelegate.swift */,
 				78FCFD9623F920930051B48E /* SceneDelegate.swift */,
 				78FCFD9823F920930051B48E /* ContentView.swift */,
@@ -271,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78FCFD9523F920930051B48E /* AppDelegate.swift in Sources */,
+				78FB3261240270EA00666F5B /* Data.swift in Sources */,
 				78FCFD9723F920930051B48E /* SceneDelegate.swift in Sources */,
 				78FCFD9923F920930051B48E /* ContentView.swift in Sources */,
 				78FCFDC923F921600051B48E /* DogBreedClassifierModel.mlmodel in Sources */,

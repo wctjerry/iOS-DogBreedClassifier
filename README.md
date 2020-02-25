@@ -6,7 +6,7 @@ TODO:
 
 1. Randomly show an image along with four choices for users to choose
    1. ~~Implement UI with one image and four choice~~
-   2. Import testing images and implement selecting an image randomly
+   2. ~~Import testing images and implement selecting an image randomly~~
    3. Generate four choices randomly, with one correct answer and the other three randomly chosen
    4. Link generated data to the UI view
 2. Randomly select 20% training data as testing data. It will be used for challenging human and AI model

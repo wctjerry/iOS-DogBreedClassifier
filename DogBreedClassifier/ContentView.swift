@@ -12,17 +12,23 @@ import Vision
 
 struct ContentView: View {
     @State var label: String = "Classifying"
-    @State var imageName: String = "123"
+    @State var defaultImageName: String = "123"
     @State private var selectionIndex = 0
+    @State var shownImage: String = "123"
     
     var selections = ["Dog A", "Dog B", "Dog C", "Dog D"]
     
+    var gameData: GameData
+        
+    func randomImage() -> String? {
+        return self.gameData.images.randomElement()
+    }
     
     var body: some View {
         NavigationView {
             List {
                 VStack {
-                    Image(imageName)
+                    Image(shownImage )
                         .resizable()
                         .scaledToFit()
                         .frame(width: 300, height: 300, alignment: .center)
@@ -36,6 +42,12 @@ struct ContentView: View {
                     }
                     
                     Text("You selected \(selections[selectionIndex])")
+                   
+                    Button(action: {
+                        self.shownImage = self.randomImage()!
+                    }) {
+                        Text("Try another image")
+                    }
                 }
             }
         }
@@ -47,7 +59,7 @@ struct ContentView: View {
             return
         }
         
-        guard let uiImage = UIImage(named: imageName) else {
+        guard let uiImage = UIImage(named: defaultImageName) else {
             label = "Error converting to UIImage"
             return
         }
@@ -75,6 +87,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(gameData: GameData())
     }
 }
