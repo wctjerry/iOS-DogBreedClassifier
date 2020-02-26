@@ -14,37 +14,59 @@ struct ContentView: View {
     @State var label: String = "Classifying"
     @State var defaultImageName: String = "123"
     @State private var selectionIndex = 0
-    @State var shownImage: String = "123"
-    
-    var selections = ["Dog A", "Dog B", "Dog C", "Dog D"]
+    @State var selectedImage: String = "123"
+    @State var selections = ["Dog A"]
     
     var gameData: GameData
         
-    func randomImage() -> String? {
-        return self.gameData.images.randomElement()
+    func randomImage () -> String {
+        return self.gameData.images.randomElement()!
+    }
+    
+    func randomBreedSelections (selections: [String]) -> [String] {
+        // Generate up to four random distinct choices of dog breed
+        
+        var selectionsTemp = selections
+        
+        while selectionsTemp.count < 4 {
+            var randomBreedTemp = self.gameData.dataSet[self.randomImage()]!
+            
+            while selectionsTemp.contains(randomBreedTemp) {
+                print("Inside loop, selections: \(randomBreedTemp)")
+                randomBreedTemp = self.gameData.dataSet[self.randomImage()]!
+            }
+            
+            selectionsTemp.append(randomBreedTemp)
+            print("Outside loop, selections: \(selectionsTemp)")
+        }
+        
+        return selectionsTemp
     }
     
     var body: some View {
         NavigationView {
             List {
                 VStack {
-                    Image(shownImage )
+                    Image(selectedImage)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 300, height: 300, alignment: .center)
                         .fixedSize()
                     
                     Picker(selection: $selectionIndex, label: Text("Select")) {
-                        ForEach(0 ..< selections.count) { index in
-                            Text(self.selections[index])
+                        ForEach(self.selections, id: \.self) { selection in
+                            Text(selection)
                                 .navigationBarTitle(Text("Battle against AI"))
                         }
                     }
+                    .id(self.selections)
                     
                     Text("You selected \(selections[selectionIndex])")
                    
                     Button(action: {
-                        self.shownImage = self.randomImage()!
+                        self.selectedImage = self.randomImage()
+                        self.selections = self.randomBreedSelections(selections: self.selections)
+                        
                     }) {
                         Text("Try another image")
                     }
