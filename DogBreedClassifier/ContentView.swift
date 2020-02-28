@@ -25,23 +25,26 @@ struct ContentView: View {
         return self.gameData.images.randomElement()!
     }
     
-    func randomBreedSelections (selections: [String]) -> [String] {
-        // Generate up to four random distinct choices of dog breed
+    func randomBreedSelections (predictImage: String) -> [String] {
+        // Generate up to four random and distinct choices of dog breed
+        // One of which is the classifier's prediction
         
-        var selectionsTemp = selections
+        var selections: [String] = []
+        let predictedBreed = self.runClassifier(image: predictImage)
+        selections.append(predictedBreed) // This means predicted breed will always be the first selection
         
-        while selectionsTemp.count < 4 {
-            var randomBreedTemp = self.gameData.dataSet[self.randomImage()]!
+        while selections.count < 4 {
+            var randomBreed = self.gameData.dataSet[self.randomImage()]!
             
-            while selectionsTemp.contains(randomBreedTemp) {
-                randomBreedTemp = self.gameData.dataSet[self.randomImage()]!
+            while selections.contains(randomBreed) {
+                randomBreed = self.gameData.dataSet[self.randomImage()]!
             }
             
-            selectionsTemp.append(randomBreedTemp)
+            selections.append(randomBreed)
         }
         
-        print("Generated selections: \(selectionsTemp)")
-        return selectionsTemp
+        print("Generated selections: \(selections)")
+        return selections
     }
     
     var body: some View {
@@ -64,15 +67,11 @@ struct ContentView: View {
                     
 //                    Text("You selected \(selections[selectionIndex] ?? "None")")
                     
-                    Text("Model predicts as \(predictedBreed)")
+//                    Text("Model predicts as \(predictedBreed)")
                    
                     Button(action: {
                         self.selectedImage = self.randomImage()
-                        self.selections = []
-                        self.predictedBreed = self.runClassifier(image: self.selectedImage)
-                        self.selections.append(self.predictedBreed)
-                        self.selections = self.randomBreedSelections(selections: self.selections)
-                        
+                        self.selections = self.randomBreedSelections(predictImage: self.selectedImage)
                     }) {
                         Text("Try another image")
                     }
@@ -80,9 +79,7 @@ struct ContentView: View {
             }
         }.onAppear(){
             self.selectedImage = self.randomImage()
-            self.predictedBreed = self.runClassifier(image: self.selectedImage)
-            self.selections.append(self.predictedBreed)
-            self.selections = self.randomBreedSelections(selections: self.selections)
+            self.selections = self.randomBreedSelections(predictImage: self.selectedImage)
         }
     }
     
