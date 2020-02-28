@@ -11,15 +11,17 @@ import CoreML
 import Vision
 
 struct ContentView: View {
-    @State var label: String = "Classifying"
+    @State var predictedBreed: String = "Classifying"
     @State var defaultImageName: String = "123"
     @State private var selectionIndex = 0
     @State var selectedImage: String = "123"
-    @State var selections = ["Dog A"]
+    @State var selections: [String] = []
     
     var gameData: GameData
         
     func randomImage () -> String {
+        // Select a random image to show
+        
         return self.gameData.images.randomElement()!
     }
     
@@ -32,14 +34,13 @@ struct ContentView: View {
             var randomBreedTemp = self.gameData.dataSet[self.randomImage()]!
             
             while selectionsTemp.contains(randomBreedTemp) {
-                print("Inside loop, selections: \(randomBreedTemp)")
                 randomBreedTemp = self.gameData.dataSet[self.randomImage()]!
             }
             
             selectionsTemp.append(randomBreedTemp)
-            print("Outside loop, selections: \(selectionsTemp)")
         }
         
+        print("Generated selections: \(selectionsTemp)")
         return selectionsTemp
     }
     
@@ -61,10 +62,15 @@ struct ContentView: View {
                     }
                     .id(self.selections)
                     
-                    Text("You selected \(selections[selectionIndex])")
+//                    Text("You selected \(selections[selectionIndex] ?? "None")")
+                    
+                    Text("Model predicts as \(predictedBreed)")
                    
                     Button(action: {
                         self.selectedImage = self.randomImage()
+                        self.selections = []
+                        self.predictedBreed = self.runClassifier(image: self.selectedImage)
+                        self.selections.append(self.predictedBreed)
                         self.selections = self.randomBreedSelections(selections: self.selections)
                         
                     }) {
@@ -72,38 +78,47 @@ struct ContentView: View {
                     }
                 }
             }
+        }.onAppear(){
+            self.selectedImage = self.randomImage()
+            self.predictedBreed = self.runClassifier(image: self.selectedImage)
+            self.selections.append(self.predictedBreed)
+            self.selections = self.randomBreedSelections(selections: self.selections)
         }
     }
     
-    func runClassifier() {
+    func runClassifier(image: String) -> String {
+        // Return a predicted breed of the shown image dog
+        
+        var predictedBreed = ""
+        
         guard let model = try? VNCoreMLModel(for: DogBreedClassifierModel().model) else {
-            label = "Error converting model..."
-            return
+            predictedBreed = "Error converting model..."
+            return predictedBreed
         }
         
-        guard let uiImage = UIImage(named: defaultImageName) else {
-            label = "Error converting to UIImage"
-            return
+        guard let uiImage = UIImage(named: image) else {
+            predictedBreed = "Error converting to UIImage"
+            return predictedBreed
         }
         
         guard let ciImage = CIImage(image: uiImage) else {
-            label = "Error converting to CIIamge"
-            return
+            predictedBreed = "Error converting to CIIamge"
+            return predictedBreed
         }
         
         let request = VNCoreMLRequest(model: model) { request, error in
             let results = request.results?.first as? VNClassificationObservation
-            self.label = results?.identifier ?? "Failed to classify"
+            predictedBreed = results?.identifier ?? "Failed to classify"
         }
         
         let handler = VNImageRequestHandler(ciImage: ciImage)
-        DispatchQueue.global(qos: .userInteractive).async {
-            do {
-                try handler.perform([request])
-            } catch {
-                print(error)
-            }
+        do {
+            try handler.perform([request])
+        } catch {
+            print(error)
         }
+        print(predictedBreed)
+        return predictedBreed
     }
 }
 
