@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		785419EA240F9B800006F716 /* DogBreedClassifierModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 785419E9240F9B800006F716 /* DogBreedClassifierModel.mlmodel */; };
+		785419EC240F9CEE0006F716 /* DataExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785419EB240F9CEE0006F716 /* DataExt.swift */; };
 		78FB3261240270EA00666F5B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB3260240270EA00666F5B /* Data.swift */; };
 		78FCFD9523F920930051B48E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFD9423F920930051B48E /* AppDelegate.swift */; };
 		78FCFD9723F920930051B48E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFD9623F920930051B48E /* SceneDelegate.swift */; };
@@ -16,7 +18,6 @@
 		78FCFDA123F920930051B48E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FCFD9F23F920930051B48E /* LaunchScreen.storyboard */; };
 		78FCFDAC23F920940051B48E /* DogBreedClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFDAB23F920940051B48E /* DogBreedClassifierTests.swift */; };
 		78FCFDB723F920940051B48E /* DogBreedClassifierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFDB623F920940051B48E /* DogBreedClassifierUITests.swift */; };
-		78FCFDC923F921600051B48E /* DogBreedClassifierModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 78FCFDC823F921600051B48E /* DogBreedClassifierModel.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		785419E9240F9B800006F716 /* DogBreedClassifierModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DogBreedClassifierModel.mlmodel; sourceTree = "<group>"; };
+		785419EB240F9CEE0006F716 /* DataExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExt.swift; sourceTree = "<group>"; };
 		78FB3260240270EA00666F5B /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		78FCFD9123F920930051B48E /* DogBreedClassifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogBreedClassifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78FCFD9423F920930051B48E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +55,6 @@
 		78FCFDB223F920940051B48E /* DogBreedClassifierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DogBreedClassifierUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		78FCFDB623F920940051B48E /* DogBreedClassifierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedClassifierUITests.swift; sourceTree = "<group>"; };
 		78FCFDB823F920940051B48E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		78FCFDC823F921600051B48E /* DogBreedClassifierModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DogBreedClassifierModel.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				78FB3260240270EA00666F5B /* Data.swift */,
+				785419EB240F9CEE0006F716 /* DataExt.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -118,7 +121,7 @@
 				78FCFD9A23F920930051B48E /* Assets.xcassets */,
 				78FCFD9F23F920930051B48E /* LaunchScreen.storyboard */,
 				78FCFDA223F920930051B48E /* Info.plist */,
-				78FCFDC823F921600051B48E /* DogBreedClassifierModel.mlmodel */,
+				785419E9240F9B800006F716 /* DogBreedClassifierModel.mlmodel */,
 				78FCFD9C23F920930051B48E /* Preview Content */,
 			);
 			path = DogBreedClassifier;
@@ -282,10 +285,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				78FCFD9523F920930051B48E /* AppDelegate.swift in Sources */,
+				785419EC240F9CEE0006F716 /* DataExt.swift in Sources */,
 				78FB3261240270EA00666F5B /* Data.swift in Sources */,
 				78FCFD9723F920930051B48E /* SceneDelegate.swift in Sources */,
 				78FCFD9923F920930051B48E /* ContentView.swift in Sources */,
-				78FCFDC923F921600051B48E /* DogBreedClassifierModel.mlmodel in Sources */,
+				785419EA240F9B800006F716 /* DogBreedClassifierModel.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
