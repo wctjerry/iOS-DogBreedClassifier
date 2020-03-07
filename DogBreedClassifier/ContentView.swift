@@ -12,9 +12,9 @@ import Vision
 
 struct ContentView: View {
     @State var predictedBreed: String = "Classifying"
-    @State var defaultImageName: String = "123"
+    @State var genuineBreed: String = "Unknow"
     @State private var selectionIndex = 0
-    @State var selectedImage: String = "123"
+    @State var selectedImage: String = ""
     @State var selections: [String] = []
     
     var gameData: GameData
@@ -25,13 +25,30 @@ struct ContentView: View {
         return self.gameData.images.randomElement()!
     }
     
-    func randomBreedSelections (predictImage: String) -> [String] {
-        // Generate up to four random and distinct choices of dog breed
-        // One of which is the classifier's prediction
+    func initGame() {
+//         Initiate game setting, including:
+//         1. Randomize and show a dog image
+//         2. Predict and store the dog breed in the image
+//         3. Find out and store the dog's genuine breed
+//           Note this will modify ContentView's property
+        self.selectedImage = self.randomImage()
+        self.predictedBreed = self.runClassifier(image: self.selectedImage)
+        print("Predicted breed: \(self.predictedBreed)")
+        self.genuineBreed = gameData.dataSet[self.selectedImage]!
+        print("Genuine breed: \(self.genuineBreed)")
         
         var selections: [String] = []
-        let predictedBreed = self.runClassifier(image: predictImage)
-        selections.append(predictedBreed) // This means predicted breed will always be the first selection
+        selections.append(self.predictedBreed)
+        selections.append(self.genuineBreed)
+        
+        self.selections = self.randomBreedSelections(selections: selections)
+        
+    }
+    
+    func randomBreedSelections (selections: [String]) -> [String] {
+        // Generate up to four random and distinct choices of dog breed
+        
+        var selections = Array(Set(selections)) // Remove duplicates
         
         while selections.count < 4 {
             var randomBreed = self.gameData.dataSet[self.randomImage()]!
@@ -43,6 +60,7 @@ struct ContentView: View {
             selections.append(randomBreed)
         }
         
+        selections = selections.shuffled()
         print("Generated selections: \(selections)")
         return selections
     }
@@ -70,16 +88,14 @@ struct ContentView: View {
 //                    Text("Model predicts as \(predictedBreed)")
                    
                     Button(action: {
-                        self.selectedImage = self.randomImage()
-                        self.selections = self.randomBreedSelections(predictImage: self.selectedImage)
+                        self.initGame()
                     }) {
                         Text("Try another image")
                     }
                 }
             }
         }.onAppear(){
-            self.selectedImage = self.randomImage()
-            self.selections = self.randomBreedSelections(predictImage: self.selectedImage)
+            self.initGame()
         }
     }
     
@@ -114,7 +130,6 @@ struct ContentView: View {
         } catch {
             print(error)
         }
-        print(predictedBreed)
         return predictedBreed
     }
 }

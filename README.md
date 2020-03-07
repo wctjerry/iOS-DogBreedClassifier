@@ -23,10 +23,10 @@ TODO:
    3. ~~Generate four choices randomly and show correctly on the UI~~
 2. ~~Implement classification model's prediction on randomly shown image~~
 3. ~~Replace one of four choices with model's prediction~~
-4. Randomly select 5% training data as testing data. It will be used for challenging human and AI model
+4. ~~Randomly select 5% training data as testing data. It will be used for challenging human and AI model~~
    1. ~~Extract 5% training data~~
    2. ~~Generated the game based on this testing data~~
-   3. Make sure the prediction and the genuine breed of the dog image will be one (or two, if the prediction is different from the genuine one) of the four choices. Also randomize the order
+   3. ~~Make sure the prediction and the genuine breed of the dog image will be one (or two, if the prediction is different from the genuine one) of the four choices. Also randomize the order~~
 5. Implement battle between AI and human
    1. Record the progress of the game 
    2. End button to stop the game
