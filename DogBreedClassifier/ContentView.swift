@@ -99,8 +99,19 @@ struct ContentView: View {
                 Button(action: {
                     self.initGame()
                 }) {
-                    Text("Try another image")
-                        .foregroundColor(.white)
+                    HStack{
+                        Image(systemName: "arrow.clockwise")
+                            .font(.title)
+                        
+                        Text("Try another image")
+                            .font(.title)
+                    }
+                .padding()
+                    .foregroundColor(.white)
+                    .background(Color.red)
+                .cornerRadius(40)
+                    
+                    
                 }
                 
             }
