@@ -37,5 +37,4 @@ New UI Experiement:
 
 1. ~~Convert `Picker()` to list of `Button`~~
 2. ~~Add a background~~
-3. Add a icon to "Try another image"
-
+3. ~~Add a icon to "Try another image"~~

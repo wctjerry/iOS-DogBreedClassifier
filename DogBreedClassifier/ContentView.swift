@@ -86,7 +86,7 @@ struct ContentView: View {
                         Text(selection)
                             .font(.title)
                             .padding()
-                            .frame(width: 300)
+                            .frame(minWidth: 300, maxWidth: .infinity)
                             .background(Color.white)
                             .cornerRadius(40)
                             .foregroundColor(.black)
