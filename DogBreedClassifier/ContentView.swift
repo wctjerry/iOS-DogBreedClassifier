@@ -18,7 +18,7 @@ struct ContentView: View {
     @State var selections: [String] = []
     
     var gameData: GameData
-        
+    
     func randomImage () -> String {
         // Select a random image to show
         
@@ -26,11 +26,11 @@ struct ContentView: View {
     }
     
     func initGame() {
-//         Initiate game setting, including:
-//         1. Randomize and show a dog image
-//         2. Predict and store the dog breed in the image
-//         3. Find out and store the dog's genuine breed
-//           Note this will modify ContentView's property
+        //         Initiate game setting, including:
+        //         1. Randomize and show a dog image
+        //         2. Predict and store the dog breed in the image
+        //         3. Find out and store the dog's genuine breed
+        //           Note this will modify ContentView's property
         self.selectedImage = self.randomImage()
         self.predictedBreed = self.runClassifier(image: self.selectedImage)
         print("Predicted breed: \(self.predictedBreed)")
@@ -66,33 +66,54 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationView {
-            List {
-                VStack {
-                    Image(selectedImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 300, height: 300, alignment: .center)
-                        .fixedSize()
-                    
-                    Picker(selection: $selectionIndex, label: Text("Select")) {
-                        ForEach(self.selections, id: \.self) { selection in
-                            Text(selection)
-                                .navigationBarTitle(Text("Battle against AI"))
-                        }
-                    }
-                    .id(self.selections)
-                    
-//                    Text("You selected \(selections[selectionIndex] ?? "None")")
-                    
-//                    Text("Model predicts as \(predictedBreed)")
-                   
+        
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+            
+            
+            VStack {
+                Image(selectedImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300, height: 300, alignment: .center)
+                    .fixedSize()
+                
+                ForEach(self.selections, id: \.self) { selection in
                     Button(action: {
-                        self.initGame()
+                        // Click to do something
                     }) {
-                        Text("Try another image")
+                        Text(selection)
+                            .font(.title)
+                            .padding()
+                            .frame(minWidth: 300, maxWidth: .infinity)
+                            .background(Color.white)
+                            .cornerRadius(40)
+                            .foregroundColor(.black)
+                            .overlay(RoundedRectangle(cornerRadius: 40)
+                                .stroke(Color.blue, lineWidth: 5))
                     }
+                    .padding(8)
                 }
+                
+                Button(action: {
+                    self.initGame()
+                }) {
+                    HStack{
+                        Image(systemName: "arrow.clockwise")
+                            .font(.title)
+                        
+                        Text("Try another image")
+                            .font(.title)
+                    }
+                .padding()
+                    .foregroundColor(.white)
+                    .background(Color.red)
+                .cornerRadius(40)
+                    
+                    
+                }
+                
             }
         }.onAppear(){
             self.initGame()

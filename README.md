@@ -32,3 +32,9 @@ TODO:
    2. End button to stop the game
    3. Prompt the result after ending the game
 6. Enhance the performance of the model
+
+New UI Experiement:
+
+1. ~~Convert `Picker()` to list of `Button`~~
+2. ~~Add a background~~
+3. ~~Add a icon to "Try another image"~~
