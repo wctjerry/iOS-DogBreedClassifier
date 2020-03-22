@@ -65,6 +65,25 @@ struct ContentView: View {
         return selections
     }
     
+    struct styleSelection: View {
+        // Style four selections
+        var with: String
+        
+        var body: some View {
+            Text(with)
+            .font(.title)
+            .padding()
+            .frame(minWidth: 300, maxWidth: .infinity)
+            .background(Color.white)
+            .cornerRadius(40)
+            .foregroundColor(.black)
+            .overlay(RoundedRectangle(cornerRadius: 40)
+                .stroke(Color.blue, lineWidth: 5))
+        }
+        
+        
+    }
+    
     var body: some View {
         
         ZStack {
@@ -83,15 +102,8 @@ struct ContentView: View {
                     Button(action: {
                         // Click to do something
                     }) {
-                        Text(selection)
-                            .font(.title)
-                            .padding()
-                            .frame(minWidth: 300, maxWidth: .infinity)
-                            .background(Color.white)
-                            .cornerRadius(40)
-                            .foregroundColor(.black)
-                            .overlay(RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color.blue, lineWidth: 5))
+                        styleSelection(with: selection)
+                            
                     }
                     .padding(8)
                 }
