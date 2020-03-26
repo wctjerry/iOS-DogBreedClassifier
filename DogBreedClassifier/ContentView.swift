@@ -16,6 +16,11 @@ struct ContentView: View {
     @State private var selectionIndex = 0
     @State var selectedImage: String = ""
     @State var selections: [String] = []
+    @State var humanScore: Int = 0
+    @State var botScore: Int = 0
+    @State var alertTitle: String = ""
+    @State var alertMessage: String = ""
+    @State var showingAlert: Bool = false
     
     var gameData: GameData
     
@@ -65,20 +70,41 @@ struct ContentView: View {
         return selections
     }
     
+    func calculateRoundResult(selection: String) {
+        // Identify win or lose in a round
+        
+        if selection == self.genuineBreed { // Human is correct
+            self.humanScore += 1
+            self.alertTitle = "You are correct!"
+        } else {
+            self.alertTitle = "You are wrong!"
+        }
+        
+        if self.predictedBreed == self.genuineBreed { // Bot is correct
+            self.botScore += 1
+        }
+        
+        self.alertMessage = "You've won \(self.humanScore) \(self.humanScore == 0 ? "point" : "points")"
+        
+        self.alertMessage += ", whereas AI has won \(self.botScore) \(self.botScore == 0 ? "point" : "points")"
+        
+        self.showingAlert = true
+    }
+    
     struct styleSelection: View {
         // Style four selections
         var with: String
         
         var body: some View {
             Text(with)
-            .font(.title)
-            .padding()
-            .frame(minWidth: 300, maxWidth: .infinity)
-            .background(Color.white)
-            .cornerRadius(40)
-            .foregroundColor(.black)
-            .overlay(RoundedRectangle(cornerRadius: 40)
-                .stroke(Color.blue, lineWidth: 5))
+                .font(.title)
+                .padding()
+                .frame(minWidth: 300, maxWidth: .infinity)
+                .background(Color.white)
+                .cornerRadius(40)
+                .foregroundColor(.black)
+                .overlay(RoundedRectangle(cornerRadius: 40)
+                    .stroke(Color.blue, lineWidth: 5))
         }
         
         
@@ -100,10 +126,9 @@ struct ContentView: View {
                 
                 ForEach(self.selections, id: \.self) { selection in
                     Button(action: {
-                        // Click to do something
+                        self.calculateRoundResult(selection: selection)
                     }) {
                         styleSelection(with: selection)
-                            
                     }
                     .padding(8)
                 }
@@ -118,10 +143,10 @@ struct ContentView: View {
                         Text("Try another image")
                             .font(.title)
                     }
-                .padding()
+                    .padding()
                     .foregroundColor(.white)
                     .background(Color.red)
-                .cornerRadius(40)
+                    .cornerRadius(40)
                     
                     
                 }
@@ -129,6 +154,9 @@ struct ContentView: View {
             }
         }.onAppear(){
             self.initGame()
+        }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text(self.alertTitle), message: Text(self.alertMessage), dismissButton: .default(Text("Continue")))
         }
     }
     

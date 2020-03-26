@@ -28,7 +28,8 @@ TODO:
    2. ~~Generated the game based on this testing data~~
    3. ~~Make sure the prediction and the genuine breed of the dog image will be one (or two, if the prediction is different from the genuine one) of the four choices. Also randomize the order~~
 5. Implement battle between AI and human
-   1. Record the progress of the game 
-   2. End button to stop the game
-   3. Prompt the result after ending the game
+   1. ~~Identify win or lose after a round is ended~~
+   2. ~~Record the progress of the game~~
+   3. End button to stop the game
+   4. Prompt the result after ending the game
 6. Enhance the performance of the model
