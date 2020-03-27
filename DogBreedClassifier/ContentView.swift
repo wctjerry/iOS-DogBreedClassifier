@@ -27,7 +27,7 @@ struct ContentView: View {
     func randomImage () -> String {
         // Select a random image to show
         
-        return self.gameData.images.randomElement()!
+        return self.gameData.images.randomElement() ?? "Fail to randomize"
     }
     
     func initGame() {
