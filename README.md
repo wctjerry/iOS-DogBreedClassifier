@@ -30,6 +30,6 @@ TODO:
 5. Implement battle between AI and human
    1. ~~Identify win or lose after a round is ended~~
    2. ~~Record the progress of the game~~
-   3. End button to stop the game
-   4. Prompt the result after ending the game
+   3. ~~End button to stop the game~~
+   4. ~~Prompt the result after ending the game~~
 6. Enhance the performance of the model

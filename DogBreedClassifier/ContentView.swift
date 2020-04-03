@@ -26,6 +26,7 @@ struct ContentView: View {
     @State private var showingAlert: Bool = false
     @State private var humanScore: Int = 0
     @State private var botScore: Int = 0
+    @State private var numRounds: Int = 1
     
     var gameData: GameData
     
@@ -135,6 +136,28 @@ struct ContentView: View {
         self.alertMessage += ", whereas AI has won \(self.botScore) \(self.botScore == 0 ? "point" : "points")"
         
         self.showingAlert = true
+        
+        self.numRounds += 1
+    }
+    
+    func calculateFinalResult() {
+        self.alertTitle = "Final score"
+        
+        self.alertMessage = "Thanks for playing this game!\n"
+        self.alertMessage += "You've played \(self.numRounds) round\(checkS(num: self.numRounds)) against AI. "
+        self.alertMessage += "You've scored \(self.humanScore) point\(checkS(num: self.humanScore)), "
+        self.alertMessage += "whereas AI has scored \(self.botScore) point\(checkS(num: self.botScore))"
+        
+        self.showingAlert = true
+    }
+    
+    func checkS(num: Int) -> String {
+        // Check if need to add 's' in the string
+        if num < 2 {
+            return ""
+        } else {
+            return "s"
+        }
     }
     
     
@@ -159,21 +182,34 @@ struct ContentView: View {
                     .padding(8)
                 }
                 
-                Button(action: {
-                    self.initGame()
-                }) {
-                    HStack{
-                        Image(systemName: "arrow.clockwise")
-                            .font(.title)
-                        
-                        Text("Try another image")
-                            .font(.title)
+                HStack {
+                    Button(action: {
+                        self.initGame()
+                    }) {
+                        HStack{
+                            Image(systemName: "arrow.clockwise")
+                            
+                            Text("Try another")
+                        }
                     }
                     .padding()
-                    .foregroundColor(.white)
                     .background(Color.red)
-                    .cornerRadius(40)
+                    
+                    Button(action: {
+                        self.calculateFinalResult()
+                    }) {
+                        HStack{
+                            Image(systemName: "xmark")
+                            
+                            Text("End game")
+                        }
+                    }
+                    .padding()
+                    .background(Color.gray)
                 }
+                .font(.subheadline)
+                .foregroundColor(.white)
+                .cornerRadius(40)
             }
         }.onAppear(){
             self.initGame()
@@ -184,21 +220,21 @@ struct ContentView: View {
     }
     
     struct styleSelection: View {
-         // Style for four selections
-         var with: String
-         
-         var body: some View {
-             Text(with)
-                 .font(.title)
-                 .padding()
-                 .frame(minWidth: 300, maxWidth: .infinity)
-                 .background(Color.white)
-                 .cornerRadius(40)
-                 .foregroundColor(.black)
-                 .overlay(RoundedRectangle(cornerRadius: 40)
-                     .stroke(Color.blue, lineWidth: 5))
-         }
-     }
+        // Style for four selections
+        var with: String
+        
+        var body: some View {
+            Text(with)
+                .font(.title)
+                .padding()
+                .frame(minWidth: 300, maxWidth: .infinity)
+                .background(Color.white)
+                .cornerRadius(40)
+                .foregroundColor(.black)
+                .overlay(RoundedRectangle(cornerRadius: 40)
+                    .stroke(Color.blue, lineWidth: 5))
+        }
+    }
 }
 
 
