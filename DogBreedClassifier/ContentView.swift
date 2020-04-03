@@ -215,7 +215,9 @@ struct ContentView: View {
             self.initGame()
         }
         .alert(isPresented: $showingAlert) {
-            Alert(title: Text(self.alertTitle), message: Text(self.alertMessage), dismissButton: .default(Text("Continue")))
+            Alert(title: Text(self.alertTitle), message: Text(self.alertMessage), dismissButton: .default(Text("Try another")) {
+                self.initGame()
+                })
         }
     }
     
