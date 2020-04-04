@@ -26,7 +26,7 @@ struct ContentView: View {
     @State private var showingAlert: Bool = false
     @State private var humanScore: Int = 0
     @State private var botScore: Int = 0
-    @State private var numRounds: Int = 1
+    @State private var numRounds: Int = 0
     
     var gameData: GameData
     
