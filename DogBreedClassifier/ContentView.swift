@@ -30,7 +30,8 @@ struct ContentView: View {
     @State private var gameEnded: Bool = false
     
     // Animation
-    @State private var rotateAmount: [String: Double] = ["Unknow": 0.0]
+    @State private var rotateAmount: [String: Double] = [:]
+    @State private var opacityAmount: [String: Double] = [:]
     
     var gameData: GameData
     
@@ -101,9 +102,11 @@ struct ContentView: View {
         print("Generated selections: \(selections)")
         
         // Reset and initiate animation amount for these four selection
-        self.rotateAmount = ["Unknow": 0.0]
+        self.rotateAmount = [:]
+        self.opacityAmount = [:]
         for selection in selections {
             self.rotateAmount[selection] = 0.0
+            self.opacityAmount[selection] = 1.0
         }
         
         return selections
@@ -152,10 +155,17 @@ struct ContentView: View {
             self.humanScore += 1
             self.alertTitle = "You are correct!"
             
+            // Add animation
             guard let originAmount = self.rotateAmount[selection] else {
                 return
             }
             self.rotateAmount[selection] = originAmount + 360
+            
+            for s in self.selections {
+                if s != selection {
+                    self.opacityAmount[s] = 0.25
+                }
+            }
         } else {
             self.alertTitle = "You are wrong!"
         }
@@ -215,6 +225,7 @@ struct ContentView: View {
                     }
                     .padding(8)
                     .rotation3DEffect(Angle(degrees: self.rotateAmount[selection] ?? 0), axis: (x: 0, y: 1, z: 0))
+                    .opacity(self.opacityAmount[selection] ?? 1)
                     .animation(.default)
                 }
                 
