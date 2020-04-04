@@ -29,6 +29,9 @@ struct ContentView: View {
     @State private var numRounds: Int = 0
     @State private var gameEnded: Bool = false
     
+    // Animation
+    @State private var rotateAmount: [String: Double] = ["Unknow": 0.0]
+    
     var gameData: GameData
     
     
@@ -96,6 +99,13 @@ struct ContentView: View {
         
         selections = selections.shuffled()
         print("Generated selections: \(selections)")
+        
+        // Reset and initiate animation amount for these four selection
+        self.rotateAmount = ["Unknow": 0.0]
+        for selection in selections {
+            self.rotateAmount[selection] = 0.0
+        }
+        
         return selections
     }
     
@@ -141,6 +151,11 @@ struct ContentView: View {
         if selection == self.genuineBreed { // Human is correct
             self.humanScore += 1
             self.alertTitle = "You are correct!"
+            
+            guard let originAmount = self.rotateAmount[selection] else {
+                return
+            }
+            self.rotateAmount[selection] = originAmount + 360
         } else {
             self.alertTitle = "You are wrong!"
         }
@@ -199,6 +214,8 @@ struct ContentView: View {
                         styleSelection(with: selection)
                     }
                     .padding(8)
+                    .rotation3DEffect(Angle(degrees: self.rotateAmount[selection] ?? 0), axis: (x: 0, y: 1, z: 0))
+                    .animation(.default)
                 }
                 
                 HStack {
