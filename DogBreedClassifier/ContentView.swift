@@ -27,12 +27,30 @@ struct ContentView: View {
     @State private var humanScore: Int = 0
     @State private var botScore: Int = 0
     @State private var numRounds: Int = 0
+    @State private var gameEnded: Bool = false
     
     var gameData: GameData
     
     
     func initGame() {
-        //  Initiate game setting, including:
+        // Reset status
+        self.humanScore = 0
+        self.botScore = 0
+        self.numRounds = 0
+        self.gameEnded = false
+        
+        // Reset alerting message
+        self.alertTitle = ""
+        self.alertMessage = ""
+        self.showingAlert = false
+        
+        // Initiate round setting
+        initRound()
+        
+    }
+    
+    func initRound() {
+        //  Initiate round setting, including:
         //    1. Randomize and show a dog image on the screen
         //    2. Predict the dog breed by classifier model
         //    3. Find out and store the dog's genuine breed
@@ -148,6 +166,7 @@ struct ContentView: View {
         self.alertMessage += "You've scored \(self.humanScore) point\(checkS(num: self.humanScore)), "
         self.alertMessage += "whereas AI has scored \(self.botScore) point\(checkS(num: self.botScore))"
         
+        self.gameEnded = true
         self.showingAlert = true
     }
     
@@ -184,7 +203,7 @@ struct ContentView: View {
                 
                 HStack {
                     Button(action: {
-                        self.initGame()
+                        self.initRound()
                     }) {
                         HStack{
                             Image(systemName: "arrow.clockwise")
@@ -215,8 +234,12 @@ struct ContentView: View {
             self.initGame()
         }
         .alert(isPresented: $showingAlert) {
-            Alert(title: Text(self.alertTitle), message: Text(self.alertMessage), dismissButton: .default(Text("Try another")) {
-                self.initGame()
+            Alert(title: Text(self.alertTitle), message: Text(self.alertMessage), dismissButton: .default(Text(self.gameEnded ? "Reset" : "Try another")) {
+                if self.gameEnded {
+                    self.initGame()
+                } else {
+                    self.initRound()
+                }
                 })
         }
     }
